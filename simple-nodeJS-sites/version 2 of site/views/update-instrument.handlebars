@@ -1,0 +1,30 @@
+<h1>Update {{instrument.manufacturer}} {{instrument.type}}:</h1>
+<form id="update-instrument" action="/test_site2/instrument" method="post">
+    Type: <input type="text" name="type" value="{{instrument.type}}"><br>
+    Manufacturer: <input type="text" name="manufacturer" value="{{instrument.manufacturer}}"><br>
+    Serial Num: <input id="serial_num" type="text" name="serial_num" size="48" value={{instrument.serial_num}}><BR>
+    Last Repair Date: <input id="last_repair_date" type="date" name="last_repair_date" value={{instrument.last_repair_date}}><BR><BR>
+    Needs Repair: <input name="needs_repair" type="checkbox" id="needs_repair" value="1" {{#if instrument.needs_repair}}checked{{/if}}>
+<BR> <BR>
+<button onclick="updateInstrument({{instrument.id}})">Update</button>
+</form><BR><BR>
+{{#if instrument.sid}}
+Assigned Student: {{instrument.fname}} {{instrument.lname}} &nbsp; 
+<!--   the following is not yet functional - removing temporarily -->
+<!--  <button onclick="deleteStudentInstrument({{instrument.siid}})">Remove</button> {{instrument.siid}}    -->
+<BR><BR>
+{{else}}
+Assign to Student: 
+<form id="assignastudentinstrument" action="/test_site2/instruments/addstudentinstrument" method="post">
+<select name="sid">
+  {{#each uninstrumented_students}}
+  <option value="{{id}}">{{fname}} {{lname}}</option>
+  {{/each}}
+</select>
+  <input type="hidden" name="iid" value="{{instrument.id}}">
+<input type="submit" value="Assign">
+</form>
+<BR>
+{{/if}}
+<P>Return to the <A HREF="/test_site2/instruments">School-Owned Instrument List</A></P>
+<BR><BR>

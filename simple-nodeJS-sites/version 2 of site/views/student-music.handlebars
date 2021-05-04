@@ -1,0 +1,52 @@
+<h1>Band Students Music Assignments:</h1>
+<table border=0>
+    <thead> 
+        <th align=left>Title &nbsp;</th> 
+        <th align=left>Composer &nbsp;</th> 
+        <th align=left>Student</th>
+        <th colspan=4> &nbsp; </th>
+        <th align=left>Notes</th>
+    </thead> 
+    <tbody> 
+        {{#each student_music}} 
+        <tr> 
+            <td align=left>{{title}}</td> 
+            <td align=left>{{composer}}</td> 
+            <td align=left>{{fname}} {{lname}}</td> 
+            <td align=left>{{bandname}} Band</td> 
+            <td> &nbsp; </td>
+            <td><button onclick="deleteStudentMusic({{id}})">Remove</button></td>
+            <td><a href="/test_site2/student-music/{{id}}">Update Entry</a> &nbsp; &nbsp; </td>
+            <td align=left>{{note}}</td> 
+        </tr> 
+        {{/each}} 
+    </tbody> 
+</table>
+<BR><BR>
+
+<form id="addstudentmusic" action="/test_site2/student-music" method="post">
+  <fieldset>
+  <legend>Add a Music Assignment:</legend>
+    <label>Student:  
+      <select name="sid" id="sid">
+        {{#each all_students}}
+          <option value="{{id}}">{{fname}} {{lname}}</option>
+        {{/each}}
+      </select>
+</label>
+<BR>
+    <label>Piece: 
+      <select name="mid" id="mid">
+        {{#each all_music}}
+          <option value="{{id}}">{{title}}</option>
+        {{/each}}
+      </select>
+</label>
+
+<BR> 
+    <label>Notes: <input type="text" name="note"></label><BR>
+    <BR>
+    <input type="submit" value="Submit">
+  </fieldset>
+</form>
+<BR><BR> 

@@ -1,0 +1,43 @@
+<h1>School-Owned Instruments:</h1>
+<table border=0>
+    <thead> 
+        <th>Type &nbsp;</th> 
+        <th>Manufacturer &nbsp;</th> 
+        <th>Serial Num.</th>
+        <th>Needs Repair &nbsp;</th>
+        <th>Last Repair Date &nbsp;</th>
+        <th colspan=2>Modify Instrument</th>
+    </thead> 
+    <tbody> 
+        {{#each instruments}} 
+        <tr> 
+            <td>{{type}}</td> 
+            <td>{{manufacturer}}</td> 
+            <td align=center>{{serial_num}}</td> 
+            <td align=center>{{needs_repair}}</td>
+            <td>{{last_repair_date}}</td>
+            <td><button onclick="deleteInstrument({{id}})">Delete</button></td>
+            <td><a href="/test_site2/instruments/{{id}}">Update</a></td>
+        </tr> 
+        {{/each}} 
+    </tbody> 
+</table>
+<BR><BR>
+
+<form id="addinstrument" action="/test_site2/instruments" method="post">
+  <fieldset>
+  <legend>Add an Instrument:</legend>
+    <label>Type: <input type="text" name="type"></label><BR>
+    <label>Manufacturer: <input type="text" name="manufacturer"></label><BR>
+    <label>Serial Num:  <input type="text" name="serial_num"></label><BR>
+<!--    <label>Needs Repair:   -->
+<!-- <input type="checkbox" id="needs_repair" name="needs_repair" value="1" data-unchecked-value="0"> -->
+<!-- <input type="checkbox" id="needs_repair" name="needs_repair" value="1" {{#if needs_repair}}checked{{/if}}> -->
+<!-- <input type="checkbox" id="needs_repair" name="needs_repair" value="1" {{bindAttr needs_repair="isChecked"}}>  -->
+<!-- <input type="checkbox" id="needs_repair" value="needs_repair" unchecked>  -->
+<!-- </label><BR> -->
+<BR>
+    <input type="submit" value="Submit">
+  </fieldset>
+</form>
+<BR><BR>

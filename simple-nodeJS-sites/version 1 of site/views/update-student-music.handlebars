@@ -1,0 +1,14 @@
+<h2>Update notes on {{student_music.fname}} {{student_music.lname}}'s copy of {{student_music.title}}:</h2>
+
+<form id="update-student-music" action="/test_site/student-music" method="post">
+{{student_music.title}} <BR>
+by {{student_music.composer}}<BR><BR>
+<input type="hidden" name="sid" value="{{student_music.sid}}">
+<input type="hidden" name="mid" value="{{student_music.mid}}">
+Note: <input type="text" name="note" value="{{student_music.note}}"> <BR>
+</form>
+<br>
+<button onclick="updateStudentMusic({{student_music.id}})">Update</button>
+<BR>
+<P>Return to the <A HREF="/test_site/student-music">Student Music Assignments</A></P>
+<BR>

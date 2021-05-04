@@ -1,0 +1,12 @@
+<h1>Update {{piece.title}} by {{piece.composer}}:</h1>
+<form id="update-piece" action="/test_site/piece" method="post">
+    First name: <input type="text" name="title" value="{{piece.title}}"><br>
+    Last name: <input type="text" name="composer" value="{{piece.composer}}"><br>
+    Tempo: <input type="number" name="temp_bpm" size="30" min="1" max="12" value={{piece.temp_bpm}}><BR>
+    Difficulty: <input type="number" name="difficulty" value="{{piece.difficulty}}"><br>
+</form>
+<BR>
+<button onclick="updatePiece({{piece.id}})">Update</button>
+<BR>
+<P>Return to the <A HREF="/test_site/music">Music Library</A></P>
+<BR>
