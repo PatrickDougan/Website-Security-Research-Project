@@ -34,7 +34,7 @@ app.get('/', function(req, res)  {
         var sql = "SELECT * FROM comments"
         con.query(sql, function(err, result) {
                 if (err) throw err;
-                res.render('index', {results: result})
+                res.render('indexXSS', {results: result})
         });
         //var context = {kids: 'hello world'}
         //res.render('index', context)
