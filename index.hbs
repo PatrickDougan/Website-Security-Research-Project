@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charaset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<title> comment syste in node</title>
+</head>
+<body>
+	<div class="wrapper">
+		<form action="/" method="POST" class="form">
+			<label for="name">Name</label><br>
+			<input type="text" id="name" name="name"><br>
+			<label for="email">Email</label><br>
+			<input type="text" id="email" name="email"><br>
+			<label for="comment">Comment</label><br>
+			<input type="text" id="comment" name="comment"><br>
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+	<table>
+		{{#each results}}
+		<tr>
+			<td>{{ name }} </td>
+			<td>{{{ comment }}} </td>
+		</tr>
+		{{/each}}
+	</table>
+	
+</body>
+</html>
