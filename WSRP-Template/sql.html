@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>Website Security Research Project</title>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico" />
+        <!-- Core CSS -->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Bootstrap CSS -->
+        <link href="css/bootstrap.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="index.html">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="sql.html">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">Broken Authentication</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">XML External Entities (XXE)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">Insecure Desterilization</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="#">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a>SQL Injection Attack</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Introduction</h1>
+                    <p>SQL injection is a type of injection attack. Injection attacks occur when maliciously crafted inputs are 
+                    submitted by an attacker, causing an application to perform an unintended action. Because of the 
+                    ubiquity of SQL databases, SQL injection is one of the most common types of attack on the internet.
+                    Hackers will commonly use SQL injection attacks to extract sensitive information, enumerate the 
+                    authentication details of users registered on a website, delete or drop tables, or to inject further 
+                    malicious code, such as when a user visits the website. </p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Scenario</h1>
+                    <p>Example: The application uses untrusted data in the construction of the following vulnerable SQL call:</p>
+                    <p><code>String query = "SELECT * FROM accounts WHERE custID='"' + request.getParameter("id") + "'"</code></p>
+                    <p>The attacker modifies the id parameter value in her browser to send following:</p>
+                    <p><code>' or '1'='1</code></p><p>For example:</p>
+                    <p><code>http://example.com/app/accountView?id=' </code>or<code> '1'='1</code></p>
+                    <p>This changes the meaning of the query to return all the records from the accounts table. More 
+                    dangerous attacks could modify data or even invoke stored procedures.</p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Demonstration</h1>
+                    <p><b>[1] </b>There is an SQL Injection exploit in the User Search feature at the following URL: </p>
+                    <p><a href="http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/usersearch" class="link-primary">http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/usersearch</a></p>
+                    <p><b>[2] </b>By injecting a single quote <code> ' </code>, we see an error has occurred.</p>
+                    <img src="img/searchresults.png" class="img-fluid" alt="Responsive image">
+                    <p><b>[3] </b>An attacker can exploit this further and obtain potentially sensitive information from the 
+                    database by supplying the following input:</p>
+                    <p><code> ' UNION SELECT password FROM accounts WHERE login='root' -- //</code></p>
+                    <img src="img/searchresultsexploit.png" class="img-fluid" alt="Responsive image">
+                    <p><b>[4] </b>You can now see the sensitive data results obtained from the exploit query. </p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Prevention</h1>
+                    <p>With user input channels being the main vector for such attacks, the best approach is controlling and 
+                    vetting user input to watch for attack patterns. Developers can also avoid vulnerabilities by applying the 
+                    following main prevention methods.</p>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <!-- Core JS -->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
