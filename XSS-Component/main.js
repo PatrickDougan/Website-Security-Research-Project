@@ -56,9 +56,7 @@ app.get('/vuln_xss', function(req, res)  {
 		res.setHeader('Content-Type', 'text/html')
 		res.render('index', {results: result})
         });
-        //var context = {kids: 'hello world'}
-        //res.render('index', context)
-        //res.sendFile('/home/cody/Documents/index.html');
+
 });
 
 app.post('/', urlencodedParser,  function(req, res) {
@@ -67,7 +65,6 @@ app.post('/', urlencodedParser,  function(req, res) {
         con.query(sql, function (err, result) {
                 if (err) throw err;
                 res.redirect('/');
-                //console.log("Number of records insertd: " + result.affectedRows);
         });
 });
 
