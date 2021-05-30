@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<style>
+	body{background-color: powderblue;}
+	.iframe-container{
+		text-align:center;
+		width:50%;
+		
+	}
+	.name{
+		margin-left:auto;
+		margin-right:auto;
+		display:table;
+	}
+	.email{display:table-cell}
+	.wrapper{}
+</style>
+
+<head>
+	<meta charaset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	
+	<title> comment system in node</title>
+</head>
+<body
+<div class="iframe-container">
+<iframe  width="900" height="600" src="https://www.youtube.com/embed/IuzU4y-UjLw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>	
+</div>
+<br>
+<div class="wrapper">
+	<form action="/" method="POST" class="form" if="usrform">
+		<div class="name">
+			<div class="email">
+			<label for="name">Name</label><br>
+			<input type="text" id="name" name="name"><br>
+			</div>
+			<div class="email">
+			<label for="email">Email</label><br>
+			<input  type="text" id="email" name="email"><br>
+			</div>
+		</div>
+		<label for="comment">Comment</label><br>
+		<input type="text" rows="4" cols="50" id="comment" name="comment"><br>
+		<input type="submit" value="Submit">
+	</form>
+	</div>
+	<table>
+		{{#each results}}
+		<tr>
+			<td>{{ name }}: </td>
+			<td>{{ comment }} </td>
+		</tr>
+		{{/each}}
+	</table>
+	
+</body>
+</html>
