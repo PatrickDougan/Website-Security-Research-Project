@@ -29,11 +29,27 @@ con.connect(function(Error){
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false})
 
-app.get('/com', function(req, res) {
+app.get('/vuln_component', function(req, res) {
 	res.render('aug', {title: 'download page', layout: 'aug'});
 });
 
-app.get('/', function(req, res)  {
+app.get('/sec_component', function(req, res) {
+	res.render('server', {title: 'download page', layout: 'server'});
+});
+
+app.get('/sec_xss', function(req, res)  {
+        var sql = "SELECT * FROM comments"
+        con.query(sql, function(err, result) {
+                if (err) throw err;
+		res.setHeader('Content-Type', 'text/html')
+		res.render('secure', {ititle: 'secure', layout: 'secure', results: result})
+        });
+        //var context = {kids: 'hello world'}
+        //res.render('index', context)
+        //res.sendFile('/home/cody/Documents/index.html');
+});
+
+app.get('/vuln_xss', function(req, res)  {
         var sql = "SELECT * FROM comments"
         con.query(sql, function(err, result) {
                 if (err) throw err;
