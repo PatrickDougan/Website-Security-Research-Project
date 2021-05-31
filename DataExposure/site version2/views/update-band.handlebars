@@ -1,0 +1,32 @@
+<h1>Update {{bands.name}} Band:</h1>
+<form id="update-band" action="/test_site2/band" method="post">
+    Band name: <input type="text" name="name" value="{{bands.name}}"><BR><BR>
+    Director's First name: <input type="text" name="director_fname" value="{{bands.director_fname}}"><BR><BR>
+    Director's Last name: <input type="text" name="director_lname" value="{{bands.director_lname}}"><BR><BR>
+</form>
+<br>
+<button onclick="updateBand({{bands.id}})">Update</button>
+<BR><BR>
+<h2>Music currently assigned to {{bands.name}} Band:</h2>
+<table border=0>
+    <thead>
+        <th align=left>Title &nbsp;</th>
+        <th align=left>Composer &nbsp;</th>
+        <th> &nbsp; </th>
+        <th colspan=2>Modify Assignment</th>
+    </thead>
+    <tbody>
+        {{#each music}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{composer}}</td>
+            <td> &nbsp; </td>
+            <td><button onclick="deleteAssignment({{bmid}})">Remove</button></td>
+            <td><a href="/test_site2/music/{{id}}">Update Piece</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<BR><BR>
+<P>Return to the <A HREF="/test_site2/bands">Band List</A></P>
+<BR><BR>

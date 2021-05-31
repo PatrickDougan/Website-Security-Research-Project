@@ -1,0 +1,32 @@
+<h1>Band Groups:</h1>
+<table border=0>
+    <thead> 
+        <th>Band Name</th>
+        <th>Director Name &nbsp;</th> 
+        <th colspan=3>Modify Band</th>
+    </thead> 
+    <tbody> 
+        {{#each bands}} 
+        <tr> 
+            <td>{{name}}</td> 
+            <td>{{director_fname}} {{director_lname}}</td> 
+            <td>{{my_band}}</td>
+            <td><button onclick="deleteBand({{id}})">Delete</button></td>
+            <td><a href="/test_site2/bands/{{id}}">Update</a></td>
+        </tr> 
+        {{/each}} 
+    </tbody> 
+</table>
+<BR><BR>
+
+<form id="addband" action="/test_site2/bands" method="post">
+  <fieldset>
+  <legend>Add a Band Group:</legend>
+    <label>New Band Name: <input type="text" name="name"></label><BR>
+    <label>Director's First name: <input type="text" name="director_fname"></label><BR>
+    <label>Director's Last name: <input type="text" name="director_lname"></label><BR>
+    <BR>
+    <input type="submit" value="Submit">
+  </fieldset>
+</form>
+<BR><BR>

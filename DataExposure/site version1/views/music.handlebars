@@ -1,0 +1,42 @@
+<h1>Music Library:</h1>
+{{#each foo}}
+{{this}}
+{{/each}}
+<table border=0>
+    <thead> 
+        <th align=left>Title &nbsp;</th> 
+        <th align=left>Composer &nbsp;</th> 
+        <th>Tempo</th>
+        <th>Difficulty &nbsp;</th>
+        <th colspan=2>Modify Piece</th>
+        <th> &nbsp;</th>
+        <th>Assigned Band</th>
+    </thead> 
+    <tbody> 
+        {{#each music}} 
+        <tr> 
+            <td>{{title}}</td> 
+            <td>{{composer}}</td> 
+            <td align=center>{{temp_bpm}}</td> 
+            <td align=center>{{difficulty}}</td> 
+            <td><button onclick="deletePiece({{id}})">Delete</button></td>
+            <td><a href="/test_site/music/{{id}}">Update</a></td>
+            <td> &nbsp; &nbsp; </td>
+            <td align=center>{{#if assigned_band}}<A HREF="/test_site/bands/{{bid}}">{{assigned_band}}{{/if}}</td> 
+        </tr> 
+        {{/each}} 
+    </tbody> 
+</table>
+<BR><BR>
+
+<form id="addpiece" action="/music" method="post">
+  <fieldset>
+  <legend>Add a Piece:</legend>
+    <label>Title: <input type="text" name="title"></label><BR>
+    <label>Composer: <input type="text" name="composer"></label><BR>
+    <label>Tempo:  <input type="number" name="temp_bpm" size="30" min="1" max="220"></label><BR>
+    <label>Difficulty: <input type="number" name="difficulty"  min="1" max="10"></label><BR><BR>
+    <input type="submit" value="Submit">
+  </fieldset>
+</form>
+<BR><BR>

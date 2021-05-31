@@ -1,0 +1,55 @@
+<h1>Band Students:</h1>
+<table border=0>
+    <thead> 
+        <th align=left>Student Name &nbsp;</th> 
+        <th align=left>Student ID &nbsp; </th>
+        <th align=left>Grade &nbsp; </th>
+        <th align=left>Band </th>
+        <th colspan=3 align=left>Modify Student</th>
+        <th>School-Owned Instrument Assignment &nbsp;</th>
+    </thead> 
+    <tbody> 
+        {{#each students}} 
+        <tr> 
+            <td align=left>{{fname}} {{lname}} </td> 
+            <td align=left>{{studentid}}</td> 
+            <td align=left>{{grade}}</td> 
+            <td align-left>{{my_band}} &nbsp; </td>
+            <td><button onclick="deleteStudent({{id}})">Delete</button></td>
+            <td><a href="/test_site2/students/{{id}}">Update</a></td>
+            <td> &nbsp; &nbsp; </td>
+            <td>{{#if my_iid}}<A HREF="/test_site2/instruments/{{my_iid}}">{{my_imfgr}} {{my_itype}}</A>{{/if}}</td>
+        </tr> 
+        {{/each}} 
+    </tbody> 
+</table>
+<BR><BR>
+Filter by:  
+<form id="filterstudents" action="/test_site2/students" method="get">
+<select name="filter_band"> 
+  {{#each bands}}
+  <option value="{{id}}">{{name}} Band</option>
+  {{/each}}
+</select>
+    <input type="submit" value="Filter">
+  <A HREF="/test_site2/students">Clear Filter</A>
+</form> 
+
+<BR><BR>
+<form id="addstudent" action="/test_site2/students" method="post">
+  <fieldset>
+  <legend>Add a Student:</legend>
+    <label>First name: <input type="text" name="fname"></label><BR>
+    <label>Last name: <input type="text" name="lname"></label><BR>
+    <label>Grade: &nbsp;<input id ="grade" type="number" name="grade" size="30" min="1" max="12"></label><BR>
+    <label>Band: &nbsp;
+               <select name="my_band"> 
+                 {{#each bands}}
+                  <option value="{{id}}">{{name}}</option>
+                 {{/each}}
+               </select>
+    </label><BR><BR>
+    <input type="submit" value="Submit">
+  </fieldset>
+</form>
+<BR><BR>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+   <title>Band Database Interface</title>
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+   {{#each jsscripts}}
+   <script src="/static/{{this}}"></script>
+   {{/each}}
+</head>
+<body>
+<CENTER><A HREF="/test_site2/">Home</A> | <A HREF="/test_site2/bands">Bands</A> | <A HREF="/test_site2/students">Students</A> | <A HREF="/test_site2/instruments">Instruments</A> | <A HREF="/test_site2/music">Music</A> | <a href="/test_site2/student-music">Student Music Assignments</A></CENTER>
+   {{{body}}}
+<!-- footer begin -->
+<HR WIDTH="500" SIZE="1" NOSHADE ALIGN=center>
+<CENTER>
+<I>Copyright &copy; 
+<script type="text/javascript">
+  var d = new Date()
+  document.write(d.getFullYear())
+</script>
+ Michael J. Volz Portland, Oregon<BR>
+Contact at <A HREF="mailto:volzm@oregonstate.edu">volzm@oregonstate.edu</A>
+</I>
+</CENTER>
+<!-- footer end -->
+</body>
+</html>
