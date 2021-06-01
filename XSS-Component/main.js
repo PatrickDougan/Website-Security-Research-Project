@@ -65,7 +65,6 @@ app.post('/vuln', urlencodedParser,  function(req, res) {
         con.query(sql, function (err, result) {
                 if (err) throw err;
                 res.redirect('/vuln_xss');
-                //console.log("Number of records insertd: " + result.affectedRows);
         });
 });
 
@@ -75,7 +74,6 @@ app.post('/sec', urlencodedParser,  function(req, res) {
         con.query(sql, function (err, result) {
                 if (err) throw err;
                 res.redirect('/sec_xss');
-                //console.log("Number of records insertd: " + result.affectedRows);
         });
 });
 
