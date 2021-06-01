@@ -25,12 +25,13 @@ con.connect(function(Error){
         }
 });
 
+app.use(express.static('images'));
 
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false})
 
 app.get('/vuln_component', function(req, res) {
-	res.render('aug', {title: 'download page', layout: 'aug'});
+	res.render('page', {title: 'download page', layout: 'page'});
 });
 
 app.get('/sec_component', function(req, res) {
@@ -44,9 +45,6 @@ app.get('/sec_xss', function(req, res)  {
 		res.setHeader('Content-Type', 'text/html')
 		res.render('secure', {ititle: 'secure', layout: 'secure', results: result})
         });
-        //var context = {kids: 'hello world'}
-        //res.render('index', context)
-        //res.sendFile('/home/cody/Documents/index.html');
 });
 
 app.get('/vuln_xss', function(req, res)  {
@@ -56,17 +54,31 @@ app.get('/vuln_xss', function(req, res)  {
 		res.setHeader('Content-Type', 'text/html')
 		res.render('index', {results: result})
         });
-
+        //var context = {kids: 'hello world'}
+        //res.render('index', context)
+        //res.sendFile('/home/cody/Documents/index.html');
 });
 
-app.post('/', urlencodedParser,  function(req, res) {
+app.post('/vuln', urlencodedParser,  function(req, res) {
         var body = req.body;
         var sql = "INSERT INTO comments (name, email, comment) VALUES ('"+body.name+"','"+body.email+"','"+body.comment+"')";
         con.query(sql, function (err, result) {
                 if (err) throw err;
-                res.redirect('/');
+                res.redirect('/vuln_xss');
+                //console.log("Number of records insertd: " + result.affectedRows);
         });
 });
+
+app.post('/sec', urlencodedParser,  function(req, res) {
+        var body = req.body;
+        var sql = "INSERT INTO comments (name, email, comment) VALUES ('"+body.name+"','"+body.email+"','"+body.comment+"')";
+        con.query(sql, function (err, result) {
+                if (err) throw err;
+                res.redirect('/sec_xss');
+                //console.log("Number of records insertd: " + result.affectedRows);
+        });
+});
+
 
 app.listen(port, () => {
         console.log("sample running");
