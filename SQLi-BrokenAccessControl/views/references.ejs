@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Website Security Research Project</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+    </head>
+  <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sqli">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sensdata">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/xss">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/secmisconfig">Security Misconfiguration</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bac">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/component">Components with Known Vulnerabilities</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="/references">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a>References</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">General</h1>
+                    <p>https://owasp.org/www-project-top-ten/</p>
+                    <p>https://owasp.org/www-project-vulnerable-web-applications-directory/</p>
+                    <p>https://www.w3schools.com/w3css/w3css_templates.asp</p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">SQL Injection Attack</h1>
+                    <p>https://owasp.org/www-project-top-ten/2017/A1_2017-Injection</p>
+                    <p>https://portswigger.net/web-security/sql-injection</p>
+                    <p>https://www.neuralegion.com/blog/sql-injection-attack/</p>
+                    <p>https://www.rapid7.com/fundamentals/sql-injection-attacks/</p>
+                    <p>https://www.guru99.com/learn-sql-injection-with-practical-example.html</p>
+                    <p>https://www.veracode.com/blog/secure-development/how-prevent-sql-injection-nodejs</p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Sensitive Data Exposure</h1>
+                    <p>https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure</p>
+                    <p>https://hdivsecurity.com/owasp-sensitive-data-exposure</p>
+                    <p>https://blog.detectify.com/2016/07/01/owasp-top-10-sensitive-data-exposure-6/</p>
+                    <p>https://medium.com/shallvhack/owasp-sensitive-data-exposure-attacks-7ef41e6b4a59</p>
+                    <p>https://www.gosolis.com/blog/has-your-organization-been-breached-by-solar-winds-malware/</p>
+                    <p>http://index-of.co.uk/Cloud-Technology/Node.js%20Recipes%20-%20Cory%20Gackenheimer.pdf</p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Cross-Site Scripting (XSS)</h1>
+                    <p>https://owasp.org/www-community/attacks/xss/</p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Components with Known Vulnerabilities</h1>
+                    <p>https://luke0922.gitbooks.io/owsap-top-10-scurity-problem/content/chapter9.html</p>
+                    <p>https://www.siemba.io/post/owasp-top-10-using-components-with-known-vulnerabilities</p>
+                    <p>https://owasp.org/www-project-top-ten/2017/A9_2017-Using_Components_with_Known_Vulnerabilities</p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Security Misconfiguration</h1>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Broken Access Control</h1>
+                    <p>https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control</p>
+                    <p>https://avatao.com/blog-broken-access-control/</p>
+                    <p>https://cwe.mitre.org/data/definitions/425.html</p>
+                    <p>https://hdivsecurity.com/owasp-broken-access-control</p>
+                    <p>https://www.immuniweb.com/blog/OWASP-broken-access-control.html</p>
+                    <p>https://www.veracode.com/security/failure-restrict-url-access</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+    </body>
+</html>

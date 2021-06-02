@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>WSRP - User Information</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+</head>
+<body>
+    <div class="page-header text-center py-3">
+        <h2>User Information</h2>
+    </div>
+
+    <div class="table-responsive m-2 text-center">
+        <table class="table-bordered table-hover mx-auto w-auto">
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            
+            <%
+            if(userData.length!=0){
+            var i=1;
+            userData.forEach(function(data){
+            %>
+            <tr>
+                <td><%=i; %></td>
+                <td><%=data.username %></td>
+                <td><%=data.password %></td>
+                <td><%=data.email %></td>
+                <td><a href="/users/edit/<%=data.id%>">Edit</a></td>
+                <td><a href="/users/delete/<%=data.id%>">Delete</a></td>
+            </tr>
+            <%  i++; }) %>
+            <% } else{ %>
+                <tr>
+                    <td colspan="7">No Data Found</td>
+                </tr>
+            <% } %>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue" id="footer-users">
+      <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+      </div>
+    </footer>
+
+</body>
+</html>

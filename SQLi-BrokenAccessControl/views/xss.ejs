@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Website Security Research Project</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+    </head>
+  <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sqli">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sensdata">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/xss">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/secmisconfig">Security Misconfiguration</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bac">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/component">Components with Known Vulnerabilities</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="/references">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a>Cross-Site Scripting (XSS)</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+               <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Introduction</h1>
+                    <p>Cross-Site Scripting (XSS) attacks are a form of injection vulnerability, where malicious scripts are 
+                    injected into trusted websites. XSS attacks occur when an attacker uses a web application to 
+                    send malicious code to the end user. Flaws that allow these attacks to succeed can occur 
+                    anywhere a web application uses input from a user within the output it generates without
+                    validating or encoding. Because the user has no way to know the script should not be trusted it 
+                    will execute the script. The malicious script will be able to access any sensitive information being 
+                    used by the site.</p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Scenario</h1>
+                    <p>Vulnerable <a href="http://3.138.158.113:3000/vuln_xss">Link</a></br>
+                    Secured <a href="http://3.138.158.113:3000/sec_xss">Link</a></p>
+                    <p>This application allows users to post their name email and a comment. It then stores these fields in an SQL database. </p>
+                    <p><code>app.post('/', urlencodedParser,  function(req, res) {
+                    var body = req.body;
+                    var sql = "INSERT INTO comments (name, email, comment) VALUES ('"+body.name+"','"+body.email+"','"+body.comment+"')";
+                    </code></p>
+                    <p>The application then redirects to the original page and loads all comments. However the comment section is not escaped when the page is rendered.</p>
+                    <p><code>app.get('/', function(req, res)  {
+                    var sql = "SELECT * FROM comments"
+                    con.query(sql, function(err, result) {
+                    if (err) throw err;
+                    res.setHeader('Content-Type', 'text/html')
+                    res.render('index', {results: result})
+                    });</code></p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Demonstration</h1>
+                     <p>If we submit a comment with the following code: &lt;script&gt;alert(1)&lt;/script&gt;
+                    This will store a comment in the SQL DB. When the page is refreshed it will load a webpage and will process the alert(1) message as javascript. 
+                    </p>
+                    <img src="img/alert.png" class="img-fluid" alt="Responsive image">
+                    </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Prevention</h1>
+                    <p>One of the key ways to mitigate XSS is to properly escape characters. If our sample comment was 
+                    properly escaped then the webpage would display &lt;script&gt;alert(1)&lt;/script&gt; as a string instead of 
+                    executing as a JS function. </p>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+    </body>
+</html>

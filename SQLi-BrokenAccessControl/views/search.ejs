@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>WSRP - User Search</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+	</head>
+	<body>
+		<div class="container">
+		    <div class="row justify-content-center">
+		        <h1>User Search</h1>
+		    </div>
+			<div class="row justify-content-center">
+		        <div class="col-12 col-md-10 col-lg-8">
+		            <form class="card card-sm" action="/results" method="POST">
+		                <div class="card-body row no-gutters align-items-center">
+		                    <div class="col-auto">
+		                        <i class="fas fa-search h4 text-body"></i>
+		                    </div>
+		                    <div class="col">
+		                        <input class="form-control form-control-lg form-control-borderless" type="search" name="username" id="username" placeholder="Enter Username">
+		                    </div>
+		                    <div class="col-auto">
+		                        <button class="btn btn-lg btn-success" type="submit">Search</button>
+		                    </div>
+		                </div>
+		            </form>
+		        </div>
+		    </div>
+		</div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue" id="footer-search">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+        
+	</body>
+</html>

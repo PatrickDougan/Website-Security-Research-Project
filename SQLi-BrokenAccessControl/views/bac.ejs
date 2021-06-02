@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Website Security Research Project</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+    </head>
+  <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sqli">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sensdata">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/xss">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/secmisconfig">Security Misconfiguration</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bac">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/component">Components with Known Vulnerabilities</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="/references">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a>Broken Access Control</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Introduction</h1>
+                    <p>Access control enforces policy such that users cannot act outside of their intended permissions. Failures typically lead to unauthorized information disclosure, modification or destruction of all data, or performing a business function outside of the limits of the user. Many of these flawed access control schemes are not difficult to discover and exploit. Frequently, all that is required is to craft a request for functions or content that should not be granted. Once a flaw is discovered, the consequences of a flawed access control scheme can be devastating. In addition to viewing unauthorized content, an attacker might be able to change or delete content, perform unauthorized functions, or even take over site administration.</p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Scenario</h1>
+                    <p>Some specific access control issues include:</p>
+                    <ul>
+                        <li><b>Insecure ID’s</b> – Most web sites use some form of id, key, or index as a way to reference users, roles, content, objects, or functions. If an attacker can guess these id’s, and the supplied values are not validated to ensure the are authorized for the current user, the attacker can exercise the access control scheme freely to see what they can access. Web applications should not rely on the secrecy of any id’s for protection.</li>
+                        <li><b>Forced Browsing</b> – Many sites require users to pass certain checks before being granted access to certain URLs that are typically ‘deeper’ down in the site. These checks must not be bypassable by a user that simply skips over the page with the security check.</li>
+                        <li><b>Path Traversal</b> – This attack involves providing relative path information (e.g., “../../target_dir/target_file”) as part of a request for information. Such attacks try to access files that are normally not directly accessible by anyone, or would otherwise be denied if requested directly. Such attacks can be submitted in URLs as well as any other input that ultimately accesses a file (i.e., system calls and shell commands).</li>
+                        <li><b>File Permissions</b> – Many web and application servers rely on access control lists provided by the file system of the underlying platform. Even if almost all data is stored on backend servers, there are always files stored locally on the web and application server that should not be publicly accessible, particularly configuration files, default files, and scripts that are installed on most web and application servers. Only files that are specifically intended to be presented to web users should be marked as readable using the OS’s permissions mechanism, most directories should not be readable, and very few files, if any, should be marked executable.</li>
+                        <li><b>Client Side Caching</b> – Many users access web applications from shared computers located in libraries, schools, airports, and other public access points. Browsers frequently cache web pages that can be accessed by attackers to gain access to otherwise inaccessible parts of sites. Developers should use multiple mechanisms, including HTTP headers and meta tags, to be sure that pages containing sensitive information are not cached by user’s browsers.</li>
+                    </ul>
+                    <p>In the demonstration below, we will specifically be dealing with a forced browsing scenario.</p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Demonstration</h1>
+                    <p><b>[1]</b>There is a Broken Access Control exploit (forced browsing) at the following URL: </p>
+                    <p><a href="http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/" class="link-primary">http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/</a></p>
+                    <p><b>[2]</b>Using forced browsing, either with a tool or with brute force, an attacker would be able to find a hidden resource at the following URL: </p>
+                    <p><a href="http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/admin" class="link-primary">http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/admin</a></p>
+                    <p><b>[3]</b>The discovered resource is an Admin Dashboard with Admin-only functions, which allow any user who discovers the hidden URL to access these functions. There is no authentication or role-checking to prevent this. </p>
+                    <p><b>[4]</b>Using the User List function, you can see all of the user information contained within the database, including passwords. </p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Prevention</h1>
+                    <p>Access control is only effective if enforced in trusted server-side code or server-less API, where the attacker cannot modify the access control check or metadata. In this particular case, the list users function could be rewritten in a way that prevents an unauthorized user from using this function unless their role is that of an admin (requires authentication system). A role checking function could also be implemented to prevent use of any/all other administrative functions.</p>
+                    <p>Other prevention methods include:</p>
+                    <ul>
+                        <li>Deny access by default, except for public resources</li>
+                        <li>Build strong access control mechanisms and reuse them across the application</li>
+                        <li>Enforce record ownership━don’t allow users to create, read or delete any record</li>
+                        <li>Enforce usage and rate limits</li>
+                        <li>Disable server directory listing and do not store metadata or backup files in the folder root</li>
+                        <li>Log failed access attempts and alert admins</li>
+                        <li>Rate limit API and controller access</li>
+                        <li>Validate JWT tokens after logout</li>
+                    </ul>
+                    </br></br>
+                </div> 
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+    </body>
+</html>

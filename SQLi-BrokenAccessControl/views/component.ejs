@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Website Security Research Project</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+    </head>
+  <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sqli">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sensdata">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/xss">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/secmisconfig">Security Misconfiguration</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bac">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/component">Components with Known Vulnerabilities</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="/references">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a> Using Components with Known Vulnerabilities</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Introduction</h1>
+                    <p>Many web applications utilize third party libraries and frameworks. Most developers do not know the 
+                    inner workings of these libraries and are only concerned with how they can be used on their web 
+                    application. Any vulnerabilities discovered in these third party libraries can compromise a website that is 
+                    running them. When vulnerabilities are publicly disclosed, the disclosures typically include a payload 
+                    that can be used against the library. Any attackers can make use of this payload and leverage it against a 
+                    website that is running the vulnerable library. In addition this type of attack requires  a lower level of skill 
+                    making it more likely to be exploited.</p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Scenario</h1>
+                    <p>Vulnerable <a href="http://3.138.158.113:3000/vuln_component">Link</a></br>
+                    Secured <a href="http://3.138.158.113:3000/sec_component">Link</a></p>
+                    <p>In this scenario, we are running a webpage which talks about the website security project. This website 
+                    includes a link that will display the PDF of our poster. We are running the augustine server that is there 
+                    to serve the PDF to users who navigate to the page. 
+                    </p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Demonstration</h1>
+                     <p>Knowing that this website is utilizing augustine to serve the PDF file users we can check the retire.js 
+                     website to see if there are any known vulnerabilities. 
+                    </p>
+                    <img src="img/retire.png" class="img-fluid" alt="Responsive image">
+                    <p>We find the above listing and check to see what the vulnerability is. It gives a brief description of “An 
+                    adversary can leverage this vulnerability to request arbitrary files from the target host, which may 
+                    include application source code or system files.” This would be interesting to an attacker who could 
+                    leverage this to get important configuration information as well as see how our web application is built. 
+                    First we see we check the link to see the port it is running on is 8080 and then we run the payload given 
+                    in the disclosure. We enter http://3.138.158.113:8080//etc/passwd and get the output of the passwd for 
+                    the computer.
+                    </p>
+                    <img src="img/passwd.png" class="img-fluid" alt="Responsive image">
+                    <p>Additionally we can use this to view source code for the web application as well by going to 
+                    http://3.138.158.113:8080//home/ec2-user/node-express/main.js  This would provide an attacker with 
+                    the username and password to our SQL database as well.
+                    </p>
+                    <img src="img/source.png" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Prevention</h1>
+                    <p>The first step to keeping web applications secure is to identify all components as well as the versions 
+                    they are running. From there, you will need to monitor public databases where vulnerability disclosures 
+                    are published. There are also mailing lists for these types of announcements as well. Both for security 
+                    professionals as well as developers. There should also be policies set to govern the use of the libraries. 
+                    The policies should cover best practices and security testing. Any unused functionality should be 
+                    disabled and any weak components should be secured against attack.
+                    </p>
+                </div>   
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+    </body>
+</html>
