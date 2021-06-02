@@ -23,6 +23,7 @@ node main.js
 After running, main web pages will be avaiable at 
 vuln routes contain the vulnerable web application code
 sec routes contain the hardended web applicatoin code
+
 {host}/vuln_component
 {host}/sec_component
 {host}/vuln_xss
