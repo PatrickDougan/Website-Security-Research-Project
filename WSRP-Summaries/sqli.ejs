@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Website Security Research Project</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+    </head>
+  <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sqli">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sensdata">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/xss">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/secmisconfig">Security Misconfiguration</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bac">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/component">Components with Known Vulnerabilities</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="/references">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a>SQL Injection Attack</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Introduction</h1>
+                    <p>SQL injection is a type of injection attack. Injection attacks occur when maliciously crafted inputs are 
+                    submitted by an attacker, causing an application to perform an unintended action. Because of the 
+                    ubiquity of SQL databases, SQL injection is one of the most common types of attack on the internet.
+                    Hackers will commonly use SQL injection attacks to extract sensitive information, enumerate the 
+                    authentication details of users registered on a website, delete or drop tables, or to inject further 
+                    malicious code, such as when a user visits the website. </p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Scenario</h1>
+                    <p>Example: Using string concatenation within the query allows for untrusted user input to appear as data within the query.</p>
+                    <p>The following example code is vulnerable to SQL injection:</p>
+                    <img class="rounded mx-auto d-block" src="img/sql_insecurecode.png" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Demonstration</h1>
+                    <p><b>[1] </b>There is an SQL Injection exploit in the User Search feature at the following URL:</p>
+                    <a href="http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/search" class="link-primary">http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/search</a>
+                    </br></br>
+                    <p><b>[2] </b>The search function will perform as expected. Try searching for the users "admin" or "nightscopeCS". A non-existent username will result in a "No Data Found" return.</p>
+                    <img class="rounded mx-auto d-block border border-primary" src="img/sql_search.png" class="img-fluid" alt="Responsive image"></br>
+                    <img class="rounded mx-auto d-block" src="img/sql_searchresults.png" class="img-fluid" alt="Responsive image">
+                    </br>
+                    <p><b>[3] </b>As the query structure is setup to allow for untrusted user input, the search feature can be exploited by an attacker by using a single quote and attaching a <code>UNION</code> query and obtain potentially sensitive information from the database. To demonstrate, enter the following input into the search bar:</p>
+                    <p class="text-center"><code> `' UNION SELECT id,username,password FROM accounts WHERE username='root' -- //`</code></p>
+                    <img class="rounded mx-auto d-block border border-primary" src="img/sql_injection.png" class="img-fluid" alt="Responsive image">
+                    </br>
+                    <p><b>[4] </b>You can now see the sensitive data results obtained from the exploit query. You will see that instead of an email field, we have retrieved the password to the specified account. While it would be extremely careless to store plaintext passwords on a database, this example was used to emphasize how devastating even just a few lines of poorly secured code can be. It would also be relatively easy to figure out which database and/or table names to probe with an automatic SQLi tool such as SQLMap. Any existing username can be inserted into the attack query instead of "root". </p>
+                    <img class="rounded mx-auto d-block" src="img/sql_sensitivedata.png" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Prevention</h1>
+                    <p>Most instances of SQL injection can be prevented by using parameterized queries (also known as prepared statements) instead of string concatenation within the query or by applying some kind of escape character filtering. The insecure code found in the demonstration section could easily be rewritten in a way that prevents the user input from interfering with the query structure: </p>
+                    <img class="rounded mx-auto d-block" src="img/sql_securecode.png" class="img-fluid" alt="Responsive image">
+                    </br>
+                    <p>Now, any user input is automatically escaped before being executed. With MySQL, you can specify which variables get escaped within the query() method itself. You can map values in the array to placeholders (the question marks).</p>
+                    <p>Parameterized queries can be used for any situation where untrusted input appears as data within the query, including the <code>WHERE</code> clause and values in an <code>INSERT</code> or <code>UPDATE</code> statement. They can't be used to handle untrusted input in other parts of the query, such as table or column names, or the <code>ORDER BY</code> clause. Application functionality that places untrusted data into those parts of the query will need to take a different approach, such as white-listing permitted input values, or using different logic to deliver the required behavior.
+                    <p>For a parameterized query to be effective in preventing SQL injection, the string that is used in the query must always be a hard-coded constant, and must never contain any variable data from any origin. Do not be tempted to decide case-by-case whether an item of data is trusted, and continue using string concatenation within the query for cases that are considered safe. It is all too easy to make mistakes about the possible origin of data, or for changes in other code to violate assumptions about what data is tainted.</p>
+                    <p>The commit to fix the code in the demonstration above can be found at: <a href="https://github.com/PatrickDougan/WSRP" class="link-primary">https://github.com/PatrickDougan/WSRP</a></p>
+                    <p>Other prevention methods include:</p>
+                    <ul>
+                        <li>Use a safe API which avoids the use of the interpreter entirely</li>
+                        <li>Use positive or “whitelist” server-side input validation</li>
+                        <li>Escape special characters</li>
+                        <li>Use LIMIT and other SQL controls within queries to prevent mass disclosure of records in case of SQL injection.</li>
+                    </ul>
+                    </br></br> 
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+    </body>
+</html>

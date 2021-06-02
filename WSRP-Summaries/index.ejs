@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Website Security Research Project</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+    </head>
+  <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sqli">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sensdata">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/xss">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/secmisconfig">Security Misconfiguration</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bac">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/component">Components with Known Vulnerabilities</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="/references">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a>Website Security Research Project</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Introduction</h1>
+                    <p>
+                    Website security is an increasingly important concern among both developers and users of 
+                    online services. Online applications span services that include online banking, retail establishments, 
+                    government entities, educational institutions, and even network infrastructure. These can contain 
+                    sensitive data, private information, or (potentially) government secrets. Ensuring that a user’s data is 
+                    secure and will not be compromised has become paramount for any organization operating online. The 
+                    importance of web security is increasing rapidly, and the consequences of failure can be enormous. </p>
+                    <p>
+                    Our team has developed a series of deliberately insecure web applications which are vulnerable to several 
+                    common web attacks, found on the OWASP Top 10 Web Application Security Risks list. The following 
+                    guide documents each of the vulnerabilities found in the web applications, along with how to prevent 
+                    them. The purpose of this project is to allow students, developers, website administrators, or whomever 
+                    else may be interested to discover and prevent web vulnerabilities. We hope to show the 
+                    importance of observing good security practices during development and deployment. </p>
+                    <p>
+                    Our example web applications are run with Node.js, written in JavaScript and use MySQL databases. </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+  </body>
+</html>

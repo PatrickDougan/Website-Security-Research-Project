@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Website Security Research Project</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+    </head>
+  <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sqli">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sensdata">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/xss">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/secmisconfig">Security Misconfiguration</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bac">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/component">Components with Known Vulnerabilities</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="/references">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a>Sensitive Data Exposure</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Introduction</h1>
+                    <p>What is <U>Sensitive Data</U>?  Simply stated, Sensitive Data can be any information that an individual, or an organization, does not want to be public.  
+                Another way to describe this is "private information" that should not be widely known.  Sensitive data comes in a wide variety of data-types (numbers, strings, images, videos), but is often put into four classifications, based on the sensitivity of that data:
+                <UL>
+                <LI>low
+                <LI>moderate
+                <LI>high
+                <LI>restricted
+                </UL>
+                </p>
+                <P>Some examples of "low sensitivity" data could include unpublished research, business addresses, company or school directory information.  Examples of "moderate sensitivity" data include building plans, passport or VISA travel documents, and personal contact information.
+                A few simple examples of "high sensitivity" data include Social Security Numbers, birth dates, bank account numbers, loan application data, and protected health information.
+                The "restricted sensitivity" data category often include anything protected by a Non-disclosure agreement, including:  trade secrets, intellectual property data, industry-specific information, and information classified as confidential.</P>
+                <P>Generally, the higher the sensitivity of the data that is exposed, the greater the criticality of the exposure.  It might be uncomfortable if unpublished research is exposed to the world at large, but an exposed trade secret could be absolutely devastating.
+
+                <P>What is <U>Exposure</U>?  Simply put, data exposure is what happens when information is accessible at a level that it should not be.  
+                If information is intended to be publicly known (i.e., a front-desk, customer-facing phone number for a business) then exposure is a good thing.  However, when data is NOT intended to be public (i.e., the person cellular phone number of the company CEO) then exposure is a problem.</P>
+                <P>Sensitive data can be exposed when an application, an organization, or some other entity exposes personal data - which is often done mistakenly.  
+                Exposure of sensitive data can result from an inadequately protected database, weak or non-existent encryption, flaws in software applications, or simple user errors.</P>
+                <P>There are two different foundational ways that data can be exposed:  either while the data exists (and is stored) on a computer system (we will refer to this as "Data at Rest") or while the data is being transmitted from one compute system to another (we'll refer to this as "Data in Transit").  </P>
+                <p><strong>Data in Transit:</strong></p>
+                <P>When data is transmitted over a network, it is considered data <I>in transit</I>.  In this data, the information is in the state of being moved, potentially part of one or more commands being sent and/or one or more requests being received across a network to one or more other compute devices. When data is in transit, it is vulnerable to being intercepted.  This is especially true when data is being tansmitted using an unprotected interface, or if an application programming interface (API) permits different applications to communicate directly.  Data in transit is often targeted for attack, corruption, or interception.</P>
+                <p><strong>Data at Rest:</strong></p>
+                <p>When data is not moving over a network, it is considered <I>at rest</I>. This can include data stored in backup files, data within a database, or simple data on a storage medium.  Data at rest is considered to be less vulnerable (compared to data in transit) type of attack, but data stored on a server often more valuable.  An attack can access data at rest through a variety of failures, including broken authentication, inappropriate access control on the storage server, or other similar failures.</p>
+                <p>Attackers can leverage a variety of methods to access data at rest within a server.  One of the most frequently used methods (recently, at least) is with malware.  Once a piece of malware has access to a system when the target data is stored, attackers can access, steal, or encrypt any or all of the files. A recent <I>real world</I> example of this is what is known as the Solar Winds Hack, which you can read more about here:  https://www.gosolis.com/blog/has-your-organization-been-breached-by-solar-winds-malware/</P>
+
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Scenario</h1>
+                    <p>The hypothetical scenario (for our demonstration below) is that of a middle-school band teacher who uses a simple database (written in mySQL with a Node.js front-end) to keep track of their students' band records.</P>  
+                    <p>Let's say that the teacher had become frustrated with the "off-the-shelf" software offered by the school district that didn't meet their needs, so they enlisted help from a hobbyist (or maybe a novice coder) to create something.  The teacher keeps all data in a relational database and focuses on tracking school-owned instruments and music, and some basic students records (grade, which band they are in, and their student ID number).  Unbeknownst to the teacher every student's ID is <B>also</B> the student's Social Security Number, which may not have been obvious due to the display formatting (lacking the usual SSN 3x2x4 display).<P>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Demonstration</h1>
+
+                    <p>The first example shows a student list that include each StudentID, and would be rather sensitive data.  The second example shows a student list where the StudentID is encrypted to create a unique string to identify each student, but which is not easily decrypted to get a student's Social Security number.<P>
+                    <P><A HREF="http://volzpdx.com/test_site/students">Example of exposed sensitive data in a student list</A></P>
+                    <P><A HREF="http://volzpdx.com/test_site2/students">Example of protected sensitive data in a student list</A></P>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Prevention</h1>
+                    <p><strong>Tips to avoid Sensitive Data Exposure:</strong></p>
+                    <p><UL>
+                    <LI>Always encrypt sensitive data, either in transit or when being stored on a server. For any especially sensitive data, limit the accessibility of that data to only those users who are specifically authorized (with login credentials) to access it.
+                    <LI>Always use strong passwords; this includes (for each password) using upper- and lower-case characters, at least one number character, and at least one special character when possible.  Modern best practice is to alter passwords regularly and have unique passwords for each account and/or platform. 
+                    <LI>Understand that the risk level of sensitive data can change over time. Review and regularly re-assess the level of risk for any sensitive data that is stored.
+                    <LI>Always use modern and proper data backup methods, and maintain the same level of security around the data backups. 
+                    <LI>Sensitive data should always be encrypted when in transit between a server and a client, and should should be secured behind authentication gateways. 
+                    </UL></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+    </body>
+</html>
