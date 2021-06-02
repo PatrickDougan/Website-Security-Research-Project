@@ -1,6 +1,14 @@
 This file contains the source code for the Cross Site Scripting and Vulnerable component vulnerabilities from the OWASP top 10
 
-Sample running on http://3.138.158.113:3000/
+Sample running on http://3.138.158.113:3000/ 
+
+Please use the below routes
+
+http://3.138.158.113:3000/vuln_component
+http://3.138.158.113:3000/sec_component
+http://3.138.158.113:3000/vuln_xss
+http://3.138.158.113:3000/sec_xss
+
 
 The XSS vulnerability is of the stored variety. To setup the database use the below commands.
 CREATE DATABASE commentdb;
