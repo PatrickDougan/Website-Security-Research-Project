@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1><b>Web Application Security</b></h1>
+  <p>Welcome to the <span class="w3-tag">Web Application Security Blog</span></p>
+</header>
+
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+<div class="w3-col l8 s12">
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+    <img src="XSS.jpg" alt="Nature" style="width:100%">
+    <div class="w3-container">
+      <h3><b>CROSS SITE SCRIPTING</b></h3>
+      <h5>What is a stored XSS Attack?, <span class="w3-opacity">April 14, 2021</span></h5>
+    </div>
+
+    <div class="w3-container">
+		<h1>Introduction:</h1>
+		<p> Cross-Site Scripting (XSS) attacks are a form of injection vulnerability, where malicious scripts are injected into trusted websites. XSS attacks occur when an attacker uses a web application to send malicious code to the end user. Flaws that allow these attacks to succeed can occur anywhere a web application uses input from a user within the output it generates without validating or encoding. Because the user has no way to know the script should not be trusted it will execute the script. The malicious script will be able to access any sensitive information being used by the site.
+		<br>
+		<h2>Scenario:</h2>
+		This application allows users to post their name email and a comment. It then stores these fields in an SQL database. Since user input is being stored in a database, this has the potential to be a store XSS vulnerability.
+		<br>
+		<code><pre>app.post('/', urlencodedParser, function(req, res) {
+	var body = req.body;
+	var sql = "INSERT INTO comments (name, email, comment) VALUES
+	('"+body.name+"','"+body.email+"','"+body.comment+"')";
+		</code></pre>
+		The application then redirects to the original page and loads all comments. However the comment section is not escaped when the page is rendered.
+		<code><pre>
+app.get('/', function(req, res) {
+	var sql = "SELECT * FROM comments"
+	con.query(sql, function(err, results) {
+		if (err) throw err;
+		res.setHeader('Content-Type', 'text/html')
+		res.render('index', {results: result})
+		</pre></code>
+		If we submit a comment with the following code: &lt;script&gt;alert(1)&lt;/script&gt;
+This will store a comment in the SQL DB. When the page is refreshed it will load a webpage and will process the alert(1) message as javascript. 
+<img src="alert.png" alt="Nature" >
+		<h2>Prevention:</h2>
+		One of the key ways to mitigate XSS is to properly escape characters. If our sample comment was properly escaped then the webpage would display &lt;script&gt;alert(1)&lt;/script&gt; as a string instead of executing as a JS function. 
+		</p>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE Â»</b></button></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+  <img src="owasp.jpg" style="width:100%">
+    <div class="w3-container">
+      <h3><b>CHECK OUT OUR POSTER</b></h3>
+      <h5>Poster of our team's work, <span class="w3-opacity">June 2, 2021</span></h5>
+    </div>
+
+    <div class="w3-container">
+      <p>Our team has been working on developing a vulnerable web applications to introduce pieces of the OWASP top 10 to other students. 
+		students can test the vulnerabilities on given websites to see how they work. They can then check the secured websites to see good coding samples as well as learn how to secure their own projects.
+		To get a more in depth overview you can check our poster. This poster can be found at the following
+	  <a href="http://3.138.158.113:8080/poster.pdf">Link.</a>
+		<br>
+		We are hosting it on an Augustine server!
+	  </p>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE Â»</b></button></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">2</span></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- END BLOG ENTRIES -->
+</div>
+
+<!-- Introduction menu -->
+<div class="w3-col l4">
+  <!-- About Card -->
+  <div class="w3-card w3-margin w3-margin-top">
+
+    <div class="w3-container w3-white">
+      <h4><b>Patrick Dougan</b></h4>
+      <p>Giving some examples about XSS and vulnerable components and a bit of information on our groups project</p>
+    </div>
+  </div><hr>
+  
+  <!-- Posts -->
+  <div class="w3-card w3-margin">
+    <div class="w3-container w3-padding">
+      <h4>Popular Posts</h4>
+    </div>
+    <ul class="w3-ul w3-hoverable w3-white">
+      <li class="w3-padding-16">
+        <span class="w3-large">Broken Authentication</span><br>
+        <span>Reed</span>
+      </li>
+      <li class="w3-padding-16">
+        <span class="w3-large">SQL Injection</span><br>
+        <span>Fandi</span>
+      </li> 
+      <li class="w3-padding-16">
+        <span class="w3-large">Sensitive Data Exposure</span><br>
+        <span>Michael</span>
+      </li>   
+      <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+        <span class="w3-large">Broken Access Control</span><br>
+        <span>Michael</span>
+      </li>  
+    </ul>
+  </div>
+  <hr> 
+ 
+ 
+  
+<!-- END Introduction Menu -->
+</div>
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+
+
+</body>
+</html>
