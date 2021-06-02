@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Website Security Research Project</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+    </head>
+  <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sqli">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sensdata">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/xss">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/secmisconfig">Security Misconfiguration</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bac">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/component">Components with Known Vulnerabilities</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="/references">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a>Security Misconfiguration</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Introduction</h1>
+                      <p>Defending a compute system against a <U>Security Misconfiguration</U> is an exercise in considering a very wide range of (for example) defaults, unpatched flaws, or unused open ports that may have been forgotten about, overlooked, or just ignored.  That is, until an attacker takes advantage of that default setting, account, flaw, or open port to gain unauthorized access to a system, or even just to data that exists within a system.</P>
+                      <p>A security misconfiguration can occur at any level: a service within a system, a platform, a running web server, a running application server, a live database, a framework, or custom code (among a variety of other possibilities).  One very real instance of this would be a default account with the original password enabled and/or unchanged.  A default "setup" administrative account for a firewall or similar network appliance would be one example of this.  Something like "admin" as a username and "password1" or similar are commonly used to help end-customers with initial access and setup their network appliances.  If these accounts remain in their out-of-the-box state, the network (and therefore systems within the network) can exposed and compromised.  This particular vulnerability is known as a <U>default credential vulnerability</U>.
+                      <P>Fundamentally, it is safe to assume that any "default" account passwords and known and compromised as soon as the device is unboxed - the only way to secure the device is to change the original passwords, or (once setup is complete) disable all the original default-supplied accounts</P>
+                      <P>One real-world example of this was an attack that occurred as the result of a NetGear switch supporting the network at the University of Maryland (in 2012) due to a default account still being active.    Read about this real-work attack here:<BR>  <A HREF="https://www.computerworld.com/article/2716804/if-your-router-is-still-using-the-default-password--change-it-now-.html">https://www.computerworld.com/article/2716804/if-your-router-is-still-using-the-default-password--change-it-now-.html</A></P>
+                    </P>
+                    <P></P>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Scenario</h1>
+                    <p>In this scenario, a developer is creating a mySQL database.  This might be only used for "debug" purposes, but it's possible that this could become a "production" database.
+                    The developer in this scenario is rather tired and after a long day, and just doesn't want to forget what they originally created by the next morning.  So, they create a username of "admin" with a password of "password" - and it works!</P>
+                    <P>Days progress, the database proves useful, and the front-end interface becomes the focus of the developer's time and energy.  The tables and the database itself are sufficient and seem to be functioning properly.</P>
+                    <P>Then, early one morning, our developer gets a call from their supervisor; all the data is missing - or possibly worse, completely compromised via industrial espionage.</P>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Demonstration</h1>
+                    <p>Consider the following two config.js examples for database setup:</P>
+                    <TABLE CELLSPACING=2 CELLPADDING=2 BORDER=1><TR><TD>
+                    <p><code>
+                    var mysql = require('mysql');<BR>
+                    var connection = mysql.createConnection({<BR>
+                      host        : 'localhost',<BR>
+                      <B>user     : 'admin',</B><BR>
+                      <B>password : 'password',</B><BR>
+                      database : 'my_schema'<BR>
+                    });<BR>
+                    connection.connect(function(err){<BR>
+                    if(!err) {<BR>
+                      console.log("Database is connected");<BR>
+                      } else {<BR>
+                        console.log("Error while connecting with database");<BR>
+                      }<BR>
+                    });<BR>
+                    module.exports = connection;
+                    </TD></TR></TABLE>
+                    </CODE></p>
+                    <BR><BR>
+                    <TABLE CELLSPACING=2 CELLPADDING=2 BORDER=1><TR><TD>
+                    <p><code>
+                    var mysql = require('mysql');<BR>
+                    var connection = mysql.createConnection({<BR>
+                      host     : 'localhost',<BR>
+                      <B>user     : 'db_connect_user_1',</B><BR>
+                      <B>password : 't5zLg2Mi$vf',</B><BR>
+                      database : 'my_schema'<BR>
+                    });<BR>
+                    connection.connect(function(err){<BR>
+                    if(!err) {<BR>
+                      console.log("Database is connected");<BR>
+                      } else {<BR>
+                        console.log("Error while connecting with database");<BR>
+                      }<BR>
+                    });<BR>
+                    module.exports = connection;
+                    </TD></TR></TABLE>
+                    </CODE></p>
+                    <p>Note the second example has a non-default (also non-intuitive) username, along with a strong password.  These are a couple very simple, but also very effective steps to keeping an SQL database more secure.</P>
+                    <p>This may seem like an incredibly simple example - and (to be sure) it is - but it's also very relevant.  
+                    As of the writing of this summary, this is the type of expoit that was used in what is being called the <U>Solar Winds Hack</U> (or Exploit) in late 2020. In essence, the current theory is that attackers were able created their 
+                    own "default" type of account in widely used network infrastructure software, which they then later used to access a variety of very sensitive networks. 
+                    More information on this can be found here:<BR> <A HREF="https://www.domaintools.com/resources/blog/unraveling-network-infrastructure-linked-to-the-solarwinds-hack#">https://www.domaintools.com/resources/blog/unraveling-network-infrastructure-linked-to-the-solarwinds-hack</A></P>  
+
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Prevention</h1>
+                    <p><strong>Tips to avoid Security Misconfiguration:</strong></p>
+                    <p><UL>
+                    <LI>Disable unnecessary features, open ports, and running processes.  
+                    <LI>Disable or delete unused accounts, and especially default "setup" and admin accounts
+                    <LI>Keep software and applications up-to-date - old versions can leave systems exposed
+                    <LI>When a system, application, or package is upgraded always check for security issues
+                    <LI>Disable debugging message in a production environment
+                    <LI>Disable public-facing directory listings
+                    </UL></p>
+                </br>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+    </body>
+</html>
