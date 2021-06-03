@@ -1,4 +1,5 @@
-**USER INSTRUCTIONS**
+**USER INSTRUCTIONS** <BR/>
+
 First, you will want to navigate to our main index website, which is located at: <BR/>
   http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/
 
