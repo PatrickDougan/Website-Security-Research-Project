@@ -1,6 +1,6 @@
 **USER INSTRUCTIONS**
-First, you will want to navigate to our main index website, which is located at: 
-http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/
+First, you will want to navigate to our main index website, which is located at: <BR/>
+  http://ec2-34-210-43-2.us-west-2.compute.amazonaws.com:3000/
 
 You will see a introduction to our project, along with a side menu which links to each exploit we implemented: 
 
