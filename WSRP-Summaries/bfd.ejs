@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Website Security Research Project</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <script src="javascripts/bootstrap.bundle.min.js"></script>
+        <script src="javascripts/jquery-3.6.0.min.js"></script>
+        <script src="javascripts/script.js"></script>
+        <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+    </head>
+  <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">Website Security</br>Research Project</div>
+                <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">Introduction</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bfd">Brute Force Dictionary Attack</a>
+		    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sqli">SQL Injection Attack</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sensdata">Sensitive Data Exposure</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/xss">Cross-Site Scripting (XSS)</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/secmisconfig">Security Misconfiguration</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/bac">Broken Access Control</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/component">Components with Known Vulnerabilities</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light border-bottom p-3" href="/references">References</a>
+                </div>
+            </div>
+
+            <!-- Content wrapper -->
+            <div id="page-content-wrapper">
+                <!-- Top nav -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2">
+                                <li class="navbar-brand"><a>Brute Force Dictionary Attack</a></li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Content -->
+                <div class="container-fluid">
+                    <h1 class="mt-4">Introduction</h1>
+                    <p>A dictionary attack is a form of brute force attack technique for defeating a cipher or authentication mechanism by trying to determine its decryption key or passphrase by trying thousands or millions of likely possibilities, such as words in a dictionary or previously used passwords, often from lists obtained from past security breaches.
+A dictionary attack is based on trying all the strings in a pre-arranged listing. Such attacks originally used words found in a dictionary (hence the phrase dictionary attack); however, now there are much larger lists available on the open Internet containing hundreds of millions of passwords recovered from past data breaches. There is also cracking software that can use such lists and produce common variations, such as substituting numbers for similar-looking letters. A dictionary attack tries only those possibilities which are deemed most likely to succeed. Dictionary attacks often succeed because many people have a tendency to choose short passwords that are ordinary words or common passwords; or variants obtained, for example, by appending a digit or punctuation character. Dictionary attacks are often successful, since many commonly used password creation techniques are covered by the available lists, combined with cracking software pattern generation. A safer approach is to randomly generate a long password or a multiword passphrase, using a password manager program or manually typing a password.
+ 		</p>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Scenario</h1>
+                    <p>Example: The user lands on a simple login page that has very weak security. The password is stored in the clear, the MySQL database has global admin rights to the root user, with a password stored within the program, and the user's password is simply 'noodleBoat1'.</p>
+                    <p>The following example code is vulnerable to SQL injection:</p>
+                    <img class="rounded mx-auto d-block" src="img/sql_insecurecode.png" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Demonstration</h1>
+                    <p>The first link will show an example of a login page with no encryption on a password, that will be stored on a local MySQL database with global admin rights to the root user, with a password stored within the program, and with the user's password is simply 'noodleBoat1'.</p>
+</br></br>
+                    <a href="http://ec2-54-202-128-184.us-west-2.compute.amazonaws.com:21001/loginUnsecure" class="link-primary">http://ec2-54-202-128-184.us-west-2.compute.amazonaws.com:21001/loginUnsecure</a>
+                    </br></br>
+<p>The second link will show an example of a login page with SHA-256 encryption on a password, stored on a MySQL database with a user that does not have root access, and the user password in the program is a non-guessable cipher. The program only passes a JWT token rather than the hashed password to ensure another level of security.
+</p>
+		    </br></br>
+                    <a href="http://ec2-54-202-128-184.us-west-2.compute.amazonaws.com:21001/loginSecure" class="link-primary">http://ec2-54-202-128-184.us-west-2.compute.amazonaws.com:21001/loginSecure</a>
+                    </br></br>
+                </div>
+                <div class="container-fluid">
+                    <h1 class="mt-4">Prevention</h1>
+                    <p>
+			Programmers should make sure that the application is encrypting the password and storing just a token. The token should expire and the program should prompt for a new one. The database needs to be secure as well, with security policies divided amongst roles, rather than between users. The user should choose a password that is not-guessable but easily remembered, yet uses random combinations of numbers, letters, and special characters. 
+		    </p>
+                    </br></br> 
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+          <div class="footer-copyright text-center py-1">Website Security Research Project - CS467 Spring 2021
+          </div>
+        </footer>
+
+    </body>
+</html>
